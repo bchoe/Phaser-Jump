@@ -1,5 +1,5 @@
 ((Phaser, Game, CFG) => {
-  if(Game === undefined) {
+  if(Game === undefined){
     Game = window.Game = {};
   }
 
