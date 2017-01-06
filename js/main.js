@@ -1,10 +1,36 @@
 (( Phaser, Game, CFG ) => {
 
+  //global level module variables
+  //null for now
+  Game.hero = null;
+  Game.platformsGroup = null;
+  Game.cursors = null;
+
   const preload = _ => {
+
+    game.load.atlasJSONHash(
+      CFG.ASSETS.GFX,
+      CFG.ASSETS.ATLAS_PNG_PATH,
+      CFG.ASSETS.ATLAS_JSON_PATH
+    );
 
   };
 
   const create = _ => {
+
+    //setting up
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.arcade.gravity.y = CFG.GRAVITY;
+    game.stage.backgroundColor = CFG.BG_COLOR;
+
+    //create cursors
+    Game.cursors = game.input.keyboard.createCursorKeys();
+
+    Game.platformsGroup = game.add.group();
+    Game.LevelDesigner.load(game, 1);
+
+    Game.hero = new Game.Hero(game, 500, CFG.GAME_HEIGHT - 200);
+    game.camera.follow(hero.sprite, null, CFG.CAMERA_LERP, CFG.CAMERA_LERP);
 
   };
 
